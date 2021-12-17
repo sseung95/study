@@ -1,9 +1,6 @@
 :root {
   --white-color: #ffffff;
 }
-body {
-  margin: 0;
-}
 .container {
   width: 375px;
   height: 812px;
