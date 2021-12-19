@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/login.css" />
+    <title>wisecrypto</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/login.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="logo"></div>
-      <div class="main">
-        <div class="greeting">
-          <span>반갑습니다</span>
-          <span>Trusted by millions of users worldwide</span>
+    <div class="root">
+      <!-- Header -->
+      <div class="header">
+        <div class="header__logo">
+          <div class="logo"></div>
         </div>
-        <div class="sign-in">
-          <div class="sign-in__form">
-            <div class="user-info">
-              <div class="user-info__email">
+      </div>
+
+      <!-- Main -->
+      <div class="main">
+        <!-- Greeting -->
+        <div class="main__greeting">
+          <div class="greeting">
+            <p class="greeting__text">반갑습니다</p>
+            <p class="intro-text">Trusted by millions of users worldwide</p>
+          </div>
+        </div>
+        <!-- Sign in & Sign up-->
+        <div class="main__sign-in">
+          <div class="sign-in">
+            <!-- Email & password input -->
+            <div class="sign-in__input-block">
+              <div class="sign-in__email">
                 <label for="email">이메일</label>
                 <input
                   type="email"
@@ -27,7 +39,7 @@
                   name="email"
                 />
               </div>
-              <div class="user-info__pw">
+              <div class="sign-in__password">
                 <label for="pw">비밀번호</label>
                 <input
                   type="password"
@@ -36,11 +48,15 @@
                 />
               </div>
             </div>
-            <div class="user-pw-find"><a href="#">비밀번호 찾기</a></div>
+            <!-- Find password -->
+            <a class="find-password" href="#">비밀번호 찾기</a>
           </div>
-          <button class="sign-in__btn">로그인</button>
-          <div class="sign-in__sign-up">
-            <span>아직 계정이 없으신가요?</span><a href="#">회원가입</a>
+          <!-- Login button -->
+          <button class="sign-in__button">로그인</button>
+          <!-- Sign up -->
+          <div class="sign-up">
+            <span class="sign-up__text">아직 계정이 없으신가요?</span>
+            <a class="sign-up__link" href="#">회원가입</a>
           </div>
         </div>
       </div>

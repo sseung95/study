@@ -8,24 +8,27 @@
   font-family: Mulish;
   font-style: normal;
 }
-.container {
+.root {
   background-color: var(--background-color);
-  width: 375px;
-  height: 812px;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
-.logo {
-  width: 182.52px;
-  height: 64px;
-  background-image: url('/img/Logo_main.svg');
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   position: absolute;
   top: 48px;
 }
+.logo {
+  width: 183px;
+  height: 64px;
+  background: url('/img/Logo_main.svg') no-repeat;
+}
 .main {
-  /* width: var(--width-size); */
+  width: 100vw;
+  margin: 0 15px;
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -35,51 +38,37 @@
   flex-direction: column;
   align-items: center;
 }
-.greeting span:first-child {
-  /* color: var(--text-black-color);
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 40px; */
+.greeting__text {
   text-align: center;
+  color: var(--black-color);
+  align-self: stretch;
 }
-.greeting span:last-child {
-  /* color: var(--primary-color);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 18px; */
+.intro-text {
   text-align: center;
+  align-self: stretch;
 }
-.sign-in {
-  width: var(--width-size);
-  height: 300px;
+.main__sign-in {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-.sign-in__form {
+.sign-in {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
-.user-info {
+.sign-in__input-block {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.user-info__email {
-  display: flex;
-  flex-direction: column;
-}
-.user-info__pw {
-  display: flex;
-  flex-direction: column;
-}
-.user-pw-find {
+.find-password {
   text-align: center;
 }
-.sign-in__btn {
+.sign-in__input-block input {
   width: 100%;
+  box-sizing: border-box;
 }
-.sign-in__sign-up {
+.sign-up {
   text-align: center;
 }
