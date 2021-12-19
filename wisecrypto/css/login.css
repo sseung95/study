@@ -2,11 +2,9 @@
   --background-color: #f7f7f7;
   --black-color: #152c07;
   --primary-color: #5ede99;
+  --yello-color: #efbe24;
+  --white-color: #ffffff;
   --width-size: 345px;
-}
-* {
-  font-family: Mulish;
-  font-style: normal;
 }
 .root {
   background-color: var(--background-color);
@@ -39,12 +37,19 @@
   align-items: center;
 }
 .greeting__text {
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 40px;
   text-align: center;
   color: var(--black-color);
   align-self: stretch;
 }
 .intro-text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
   text-align: center;
+  color: var(--primary-color);
   align-self: stretch;
 }
 .main__sign-in {
@@ -62,13 +67,54 @@
   flex-direction: column;
   gap: 16px;
 }
-.find-password {
-  text-align: center;
+.sign-in__input-block label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
 }
 .sign-in__input-block input {
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 8px;
+
   width: 100%;
   box-sizing: border-box;
+  background: var(--white-color);
+  border: 1px solid #e9fce9;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+.sign-in__input-block input:focus {
+  outline: none;
+  border: 1px solid var(--primary-color);
+  box-shadow: 0px 2px 10px rgba(51, 51, 51, 0.1);
+}
+.find-password {
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--yello-color);
+  text-decoration: none;
+}
+.sign-in__button {
+  height: 38px;
+  background-color: var(--primary-color);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 4px;
+  border: none;
+  color: var(--white-color);
 }
 .sign-up {
   text-align: center;
+}
+.sign-up__text,
+.sign-up__link {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--primary-color);
 }
