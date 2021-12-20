@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wisecrypto</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/register_privacy.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="root">
+      <!-- Header -->
+      <div class="header">
+        <div class="header__logo">
+          <div class="logo"></div>
+        </div>
+      </div>
+
+      <!-- Main -->
+      <div class="main">
+        <!-- Description -->
+        <div class="main__description">
+          <p class="description__text">지금 등록하세요</p>
+          <p class="intro-text">Trusted by millions of users worldwide</p>
+        </div>
+        <!-- Register -->
+        <div class="main__register">
+          <!-- Register form -->
+          <form class="register">
+            <div class="register__input-block">
+              <div class="register__email-pw">
+                <div class="register__email">
+                  <label for="email">이메일</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="pw"
+                    placeholder="seung@gmail.com"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <div class="register__password">
+                  <label for="pw">비밀번호</label>
+                  <input
+                    type="password"
+                    name="pw"
+                    id="pw"
+                    placeholder="비밀번호를 입력하세요"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <div class="register__confirm-password">
+                  <label for="confirm-pw">비밀번호 확인</label>
+                  <input
+                    type="password"
+                    name="confirm-pw"
+                    id="confirm-pw"
+                    placeholder="비밀번호를 한 번 더 입력하세요"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="register__check-privacy">
+                <input type="checkbox" name="privacy" id="privacy" />
+                <label for="privacy"
+                  >이용약관, 개인정보 보호정책 및 콘텐츠 정책에
+                  동의합니다</label
+                >
+              </div>
+            </div>
+            <button class="register__button">가입완료</button>
+            <div class="sign-in">
+              <span>이미 계정이 있으신가요? </span>
+              <a href="/login.html">로그인</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
