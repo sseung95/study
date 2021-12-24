@@ -1,0 +1,190 @@
+.card {
+  // FUNCTIONALITY
+  perspective: 150rem; // 회전하는 요소의 perspective는 부모에게 있어야함
+  -moz-perspective: 150rem; // Firefox에서 쓰기 위함
+  position: relative;
+  height: 52rem;
+
+  &__side {
+    height: 52rem;
+    transition: all 0.8s ease;
+
+    position: absolute; // 부모에게 relative position 제공해야함
+    top: 0;
+    left: 0;
+    width: 100%;
+    backface-visibility: hidden; // 요소의 뒷부분을 숨김
+    border-radius: 3px;
+    overflow: hidden; // 카드 안의 배경이미지가 둥근 모서리를 가리는 현상없애기 위해
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    &--back {
+      background-color: green;
+      transform: rotateY(180deg); // hover했을 때 앞면을 보여주기 위함
+
+      &-1 {
+        background-image: linear-gradient(
+          to right,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+      }
+
+      &-2 {
+        background-image: linear-gradient(
+          to right,
+          $color-primary-light,
+          $color-primary-dark
+        );
+      }
+
+      &-3 {
+        background-image: linear-gradient(
+          to right,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+      }
+    }
+  }
+
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  &:hover &__side--back {
+    transform: rotateY(0);
+  }
+
+  // FRONT SIDE STYLING
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+    background-blend-mode: screen; // 아래 입력한 배경이미지와 그라데이션 혼합해줌
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-top-left-radius: 3px; // clip-path 사용할 때 overflow: hidden 작동하지 않아서 직접 입력
+    border-top-right-radius: 3px;
+
+    &--1 {
+      background-image: linear-gradient(
+          to right,
+          $color-secondary-light,
+          $color-secondary-dark
+        ),
+        url('../img/nat-5.jpg');
+    }
+
+    &--2 {
+      background-image: linear-gradient(
+          to right,
+          $color-primary-light,
+          $color-primary-dark
+        ),
+        url('../img/nat-6.jpg');
+    }
+
+    &--3 {
+      background-image: linear-gradient(
+          to right,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        ),
+        url('../img/nat-7.jpg');
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 70%;
+  }
+
+  // 실제로 heading의 자식이 아니기 때문에 __heading안에 중첩이 되는 것은 좋지 않음
+  // heading의 modifier가 아니며 제목의 요소가 아님
+  &__heading-span {
+    padding: 1rem 1.5rem;
+    -webkit-box-decoration-break: clone; // 텍스트가 줄바뀜되었을 때 똑같은 하나의 box가 아닌 별개의 box로 인식하게 함
+    box-decoration-break: clone;
+
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.85),
+        rgba($color-secondary-dark, 0.85)
+      );
+    }
+
+    &--2 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.85),
+        rgba($color-primary-dark, 0.85)
+      );
+    }
+
+    &--3 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.85),
+        rgba($color-tertiary-dark, 0.85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+
+    ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto; // 요소 중앙에 배치
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
+  }
+
+  // BACK SIDE STYLING
+  &__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+  }
+
+  &__price-box {
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
+  }
+}

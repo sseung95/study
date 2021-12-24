@@ -35,6 +35,15 @@
     }
   }
 
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
   /* 버튼의 자식처럼 취급 */
   &::after {
     content: ''; /* content 지정하지 않으면 나타나지 않음 */
