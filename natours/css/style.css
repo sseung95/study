@@ -615,7 +615,8 @@ body {
       padding-left: 7rem; } }
   @media (max-width: 37.5em) {
     .story {
-      transform: skewX(0deg); } }
+      transform: skewX(0deg);
+      padding: 5rem; } }
   .story__shape {
     width: 15rem;
     height: 15rem;
@@ -629,7 +630,10 @@ body {
     overflow: hidden; }
     @media (max-width: 37.5em) {
       .story__shape {
-        transform: translateX(-3rem) skewX(0deg); } }
+        transform: skewX(0deg);
+        float: none;
+        margin: 0 auto;
+        margin-bottom: 3rem; } }
   .story__img {
     height: 100%;
     transform: translateX(-4rem) scale(1.4);
@@ -759,7 +763,7 @@ body {
   position: relative;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
-  @media (max-width: 37.5em) {
+  @media (max-width: 56.25em) {
     .header {
       -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
       clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); } }

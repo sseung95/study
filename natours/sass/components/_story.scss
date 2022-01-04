@@ -17,6 +17,7 @@
 
   @include respond(phone) {
     transform: skewX(0deg);
+    padding: 5rem;
   }
 
   &__shape {
@@ -32,7 +33,10 @@
     overflow: hidden;
 
     @include respond(phone) {
-      transform: translateX(-3rem) skewX(0deg);
+      transform: skewX(0deg);
+      float: none;
+      margin: 0 auto;
+      margin-bottom: 3rem;
     }
   }
 
