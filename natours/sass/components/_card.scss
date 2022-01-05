@@ -13,7 +13,8 @@
     top: 0;
     left: 0;
     width: 100%;
-    backface-visibility: hidden; // 요소의 뒷부분을 숨김
+    -webkit-backface-visibility: hidden; // 요소의 뒷부분을 숨김
+    backface-visibility: hidden;
     border-radius: 3px;
     overflow: hidden; // 카드 안의 배경이미지가 둥근 모서리를 가리는 현상없애기 위해
     box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
