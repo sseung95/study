@@ -37,28 +37,28 @@ px 사용하는 대신 em을 사용하게 되면 사용자가 브라우저에서
 @mixin respond($breakpoint) {
   @if $breakpoint == phone {
     // 600px
-    @media (max-width: 37.5em) {
+    @media only screen and (max-width: 37.5em) {
       @content;
     }
   }
 
   @if $breakpoint == tab-port {
     // 900px
-    @media (max-width: 56.25em) {
+    @media only screen and (max-width: 56.25em) {
       @content;
     }
   }
 
   @if $breakpoint == tab-land {
     // 1200px
-    @media (max-width: 75em) {
+    @media only screen and (max-width: 75em) {
       @content;
     }
   }
 
   @if $breakpoint == big-desktop {
     // 1800px
-    @media (min-width: 112.5em) {
+    @media only screen and (min-width: 112.5em) {
       @content;
     }
   }
