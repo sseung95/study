@@ -1,0 +1,14 @@
+@mixin contentSize {
+  max-width: $size-width;
+  margin: 0 auto;
+}
+
+@mixin gradientText {
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}

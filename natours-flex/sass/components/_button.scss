@@ -1,0 +1,36 @@
+.btn {
+  font-size: $default-font-size;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &--white {
+    text-transform: uppercase;
+    padding: 2rem 3.5rem;
+    border-radius: 100px;
+    background-color: $color-white;
+    color: $color-grey-dark;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-large;
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: $shadow-small;
+  }
+}
+
+.btn-text {
+  color: $color-primary;
+  background-color: transparent;
+  border-bottom: 1px solid $color-primary;
+  padding: 0.8rem 0.4rem;
+
+  &:hover {
+    color: $color-white;
+    background-color: $color-primary;
+  }
+}

@@ -1,0 +1,56 @@
+.about {
+  background-color: $color-grey-light-1;
+  padding: 30rem 5rem;
+  margin-top: -20vh;
+
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  gap: 8rem;
+
+  &__content-box {
+    @include contentSize;
+
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+      width: 45%;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+
+  &__text-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.features {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(/img/nat-4.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 20rem 0;
+  transform: skewY(-5deg);
+  margin-top: -15rem;
+
+  &__content {
+    @include contentSize;
+    transform: skewY(5deg);
+
+    display: flex;
+    justify-content: space-between;
+  }
+}
