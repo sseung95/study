@@ -12,6 +12,14 @@
     color: $color-grey-dark;
   }
 
+  &--primary {
+    text-transform: uppercase;
+    padding: 2rem 3.5rem;
+    border-radius: 100px;
+    background-color: $color-primary;
+    color: $color-white;
+  }
+
   &:hover {
     transform: translateY(-3px);
     box-shadow: $shadow-large;

@@ -1,0 +1,67 @@
+.form {
+  font-size: $default-font-size;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  & > input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    border-bottom: 3px solid transparent; // focus 됐을 때 border-bottom이 생기면서 살짝 이동하는 것 방지
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  &__group {
+    background-color: $color-grey-light-1;
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__radio-group {
+    width: 50%;
+  }
+
+  &__radio {
+    display: none;
+  }
+
+  &__radio:checked ~ &__label {
+    background-color: $color-secondary-light;
+    color: $color-white;
+  }
+
+  &__label {
+    display: inline-block;
+    padding: 2rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: lighten($color-secondary-light, 10);
+      color: $color-white;
+    }
+  }
+}

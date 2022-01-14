@@ -1,0 +1,40 @@
+.story {
+  background-color: rgba($color-white, 0.7);
+  padding: 6rem 0;
+  transform: skewX(-8deg);
+
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+
+  & > * {
+    transform: skewX(8deg);
+  }
+
+  &__photo {
+    width: 18rem;
+    height: 18rem;
+    overflow: hidden;
+    border-radius: 50%;
+
+    &--1 {
+      background-image: url(/img/nat-8.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    &--2 {
+      background-image: url(/img/nat-9.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  &__details {
+    flex: 0 0 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
