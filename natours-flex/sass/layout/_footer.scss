@@ -1,0 +1,40 @@
+.footer {
+  background-color: $color-grey-dark-3;
+  padding: 10rem 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+
+  &__logo {
+    width: 15rem;
+    height: 100%;
+    align-self: center;
+  }
+
+  &__group {
+    @include maxWidth;
+    color: $color-white;
+    font-size: 1.4rem;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__list {
+    width: 40%;
+    text-transform: uppercase;
+    list-style: none;
+    padding-top: 2rem;
+    border-top: 0.5px solid $color-grey-dark;
+
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__copyright {
+    width: 40%;
+    padding-top: 2rem;
+    border-top: 0.5px solid $color-grey-dark;
+  }
+}
