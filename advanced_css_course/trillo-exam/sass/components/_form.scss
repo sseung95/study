@@ -1,0 +1,43 @@
+.search {
+  width: 40%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 300;
+    color: inherit;
+    width: 90%;
+    padding: 1rem 3rem;
+    margin-right: -3.5rem; // TODO: 원리가 뭔지?
+    background-color: $color-grey-light-2;
+    border: none;
+    border-radius: 100px;
+    outline: none;
+    transition: all 0.2s;
+
+    &:focus {
+      width: 100%;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-light-4;
+    }
+  }
+
+  &__button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    fill: $color-grey-dark-3;
+  }
+}

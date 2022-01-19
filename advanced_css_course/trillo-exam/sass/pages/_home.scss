@@ -1,0 +1,221 @@
+.container {
+  max-width: 114rem;
+  margin: 10rem auto;
+  background-color: #fff;
+
+  @media only screen and (max-width: 75em) {
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.content {
+  display: flex;
+
+  @media only screen and (max-width: 68.75em) {
+    flex-direction: column;
+  }
+}
+
+.hotel-view {
+  flex: 1; // 남은 자리 차지
+}
+
+.gallery {
+  display: flex;
+  overflow: hidden;
+  border-bottom: 1px solid $color-grey-light-3;
+
+  &__img {
+    width: 33.4%;
+  }
+}
+
+.overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color-grey-light-3;
+
+  &__hotel-name {
+    font-size: 2.5rem;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    padding: 0 2rem;
+  }
+
+  &__stars {
+    display: flex;
+    margin-right: auto; // ⭐️
+  }
+
+  &__location {
+    display: flex;
+    align-items: center;
+    padding: 0 4rem;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    fill: $color-primary;
+  }
+
+  &__rating {
+    padding: 1rem 2.5rem;
+    background-color: $color-primary-light;
+    color: #fff;
+    text-align: center;
+  }
+
+  &__score {
+    font-size: 2.6rem;
+    font-weight: 300;
+  }
+
+  &__votes {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+}
+
+.detail {
+  background-color: $color-grey-light-2;
+  padding: 4rem;
+
+  display: flex;
+  gap: 4rem;
+
+  @media only screen and (max-width: 43.75em) {
+    flex-direction: column;
+  }
+}
+
+.description {
+  flex: 0 0 60%;
+  background-color: #fff;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-radius: 3px;
+}
+
+.recommend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+
+  &__count {
+    font-size: 1.2rem;
+    color: $color-grey-dark-3;
+  }
+
+  &__friends {
+  }
+
+  &__photo {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    border: 3px solid #fff;
+
+    &:not(:last-child) {
+      margin-right: -2rem;
+    }
+  }
+}
+
+.user-reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  @media only screen and (max-width: 43.75em) {
+    flex-direction: row;
+  }
+}
+
+.review {
+  background-color: #fff;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media only screen and (max-width: 43.75em) {
+    flex: 0 1 50%;
+  }
+
+  &::before {
+    content: '\201C';
+    font-size: 20rem;
+    // height: 100%;
+    font-family: sans-serif;
+    line-height: 1;
+    color: $color-grey-light-3;
+
+    position: absolute;
+    top: -0.2rem;
+    left: -1.7rem;
+  }
+
+  &__text {
+    font-size: 1.4rem;
+    z-index: 10;
+  }
+
+  &__user {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__img {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+  }
+
+  &__user-box {
+    margin-right: auto;
+  }
+
+  &__user-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &__user-date {
+    color: $color-grey-dark-3;
+  }
+
+  &__rating {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: $color-primary;
+  }
+}
+
+.cta {
+  padding: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+
+  &__text {
+    font-size: 2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+}

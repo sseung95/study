@@ -1,0 +1,8 @@
+.copyright {
+  font-size: 1.2rem;
+  color: $color-grey-light-4;
+
+  @media only screen and (max-width: 68.75em) {
+    display: none;
+  }
+}

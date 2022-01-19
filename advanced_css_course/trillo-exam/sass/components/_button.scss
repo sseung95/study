@@ -1,0 +1,29 @@
+.btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &-line {
+    color: $color-primary;
+    border-bottom: 1px solid currentColor;
+
+    &:hover {
+      color: inherit;
+      transform: scale(1.05);
+    }
+  }
+
+  &-round {
+    font-size: 1.6rem;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 2rem 8rem;
+    background-image: linear-gradient(
+      to right,
+      $color-primary-light,
+      $color-primary-dark
+    );
+    border-radius: 100px;
+  }
+}

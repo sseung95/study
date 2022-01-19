@@ -1,0 +1,66 @@
+.user-nav {
+  align-self: stretch;
+
+  display: flex;
+  align-items: center;
+
+  & > * {
+    height: 100%;
+    padding: 0 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: $color-grey-light-2;
+    }
+
+    &:active {
+      background-color: darken($color-grey-light-2, 2);
+    }
+  }
+
+  &__icon-box {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: $color-grey-dark-2;
+  }
+
+  &__notification {
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: $color-primary;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 1.3rem;
+    right: 1.2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__name {
+    font-weight: 600;
+  }
+}
