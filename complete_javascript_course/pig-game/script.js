@@ -35,6 +35,10 @@ class Player {
     this.playerBox.classList.remove('player--winner');
   }
 
+  toggleActiveClass() {
+    this.playerBox.classList.toggle('player--active');
+  }
+
   // 점수 입력
   displayTotal() {
     this.totalBox.textContent = this.total;
@@ -84,8 +88,8 @@ const switchPlayer = function () {
   currPlayer = readyPlayer;
   readyPlayer = tmpPlayer;
 
-  currPlayer.addActiveClass();
-  readyPlayer.removeActiveClass();
+  currPlayer.toggleActiveClass();
+  readyPlayer.toggleActiveClass();
 };
 
 const changeDiceImg = function (random) {
