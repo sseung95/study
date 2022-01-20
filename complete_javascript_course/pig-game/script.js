@@ -84,9 +84,7 @@ let readyPlayer = player2;
 
 // 함수
 const switchPlayer = function () {
-  const tmpPlayer = currPlayer;
-  currPlayer = readyPlayer;
-  readyPlayer = tmpPlayer;
+  [currPlayer, readyPlayer] = [readyPlayer, currPlayer];
 
   currPlayer.toggleActiveClass();
   readyPlayer.toggleActiveClass();
