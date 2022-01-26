@@ -71,13 +71,53 @@ let sorted = false;
 // fUNCTION
 // ------------------
 
+/* 현재 날짜 구하기 */
+//26/01/2022, 13:19
+const getToday = function () {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, 0);
+  const date = today.getDate().toString().padStart(2, 0);
+  const hours = today.getHours().toString().padStart(2, 0);
+  const minutes = today.getMinutes().toString().padStart(2, 0);
+
+  return `${date}/${month}/${year}, ${hours}:${minutes}`;
+};
+
+/* 현재 시간 화면 표시 */
+const displayTime = function () {
+  labelDate.textContent = getToday();
+};
+
+setInterval(displayTime, 1000);
+
+const autoLogout = function () {
+  let time = 600; // 10분
+  let min = 0;
+  let sec = 0;
+
+  const timeout = setInterval(function () {
+    min = Math.trunc((time % 3600) / 60);
+    sec = Math.trunc(time % 60);
+    labelTimer.textContent = `${min.toString().padStart(2, 0)}:${sec
+      .toString()
+      .padStart(2, 0)}`;
+    time--;
+
+    if (time < 0) {
+      clearInterval(timeout);
+      containerApp.style = 'opacity: 0;';
+    }
+  }, 1000);
+};
+
 /* 이름 약어로 변환
   ex) Sarah Smith -> ss
 */
 const makeAcronyms = function (word) {
   const words = word.toLowerCase().split(' ');
   let acronyms = '';
-  words.forEach(name => (acronyms += name.at(0)));
+  words.forEach((name) => (acronyms += name.at(0)));
   return acronyms;
 };
 
@@ -90,10 +130,12 @@ const changeWelcome = function () {
 const login = function (event) {
   event.preventDefault();
 
+  autoLogout();
+
   const name = inputLoginUsername.value;
   const pin = Number(inputLoginPin.value);
 
-  accounts.forEach(account => {
+  accounts.forEach((account) => {
     let shortName = makeAcronyms(account.owner);
 
     if (shortName === name && account.pin === pin) {
@@ -131,6 +173,14 @@ const clacCurrency = function (value) {
   }).format(value);
 };
 
+const makeMovHtml = function (type, date, currency) {
+  return `<div class="movements__row">
+    <div class="movements__type movements__type--${type}">${i + 1} deposit</div>
+    <div class="movements__date">${date}</div>
+    <div class="movements__value">${currency}</div>
+    </div>`;
+};
+
 /* 거래 목록 화면 표시 */
 const displayMovements = function (movements, sorted = false) {
   removeMovements();
@@ -139,18 +189,22 @@ const displayMovements = function (movements, sorted = false) {
 
   // movement 목록 추가
   movs.forEach((movement, i) => {
-    const currency = clacCurrency(movement);
-
-    const type = movement > 0 ? 'deposit' : 'withdrawal';
-
-    const html = `<div class="movements__row">
-    <div class="movements__type movements__type--${type}">${i + 1} deposit</div>
-    <div class="movements__date">3 days ago</div>
-    <div class="movements__value">${currency}</div>
-    </div>`;
-
-    containerMovements.insertAdjacentHTML('afterbegin', html);
+    appendMovement(movement, i, '2021/02/21');
   });
+};
+
+const appendMovement = function (mov, i, date) {
+  const currency = clacCurrency(mov);
+
+  const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+  const html = `<div class="movements__row">
+  <div class="movements__type movements__type--${type}">${i + 1} deposit</div>
+  <div class="movements__date">${date}</div>
+  <div class="movements__value">${currency}</div>
+  </div>`;
+
+  containerMovements.insertAdjacentHTML('afterbegin', html);
 };
 
 /* 총 금액 화면 표시 */
@@ -162,10 +216,10 @@ const clacDisplayBalance = function () {
 /* 요약 금액 화면 표시 */
 const calcDisplaySummary = function () {
   const sumIn = currentUser.movements
-    .filter(mov => mov > 0)
+    .filter((mov) => mov > 0)
     .reduce((prev, curr) => prev + curr, 0);
   const sumOut = currentUser.movements
-    .filter(mov => mov < 0)
+    .filter((mov) => mov < 0)
     .reduce((prev, curr) => prev + curr, 0);
   labelSumIn.textContent = clacCurrency(sumIn);
   labelSumOut.textContent = clacCurrency(Math.abs(sumOut));
@@ -184,13 +238,12 @@ const transfer = function (event) {
 
   const amount = Number(inputTransferAmount.value);
   const to = accounts.find(
-    account => inputTransferTo.value === makeAcronyms(account.owner)
+    (account) => inputTransferTo.value === makeAcronyms(account.owner)
   );
 
   if (to && amount) {
     to.movements.push(amount);
     currentUser.movements.push(-amount);
-
     displayAll();
   }
 
