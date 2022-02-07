@@ -114,6 +114,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // VARIABLE
 // ------------------
 let currentUser;
+let timer;
 let sorted = false;
 
 // ------------------
@@ -128,10 +129,6 @@ const formatDate = function (acc, dateObj) {
     month: 'numeric',
     year: 'numeric',
   };
-
-  // const year = dateObj.getFullYear();
-  // const month = (dateObj.getMonth() + 1).toString().padStart(2, 0);
-  // const date = dateObj.getDate().toString().padStart(2, 0);
 
   return new Intl.DateTimeFormat(acc.locale, options).format(dateObj);
 };
@@ -153,19 +150,25 @@ const autoLogout = function () {
   let min = 0;
   let sec = 0;
 
-  const timeout = setInterval(function () {
+  const tick = function () {
     min = Math.trunc((time % 3600) / 60);
     sec = Math.trunc(time % 60);
     labelTimer.textContent = `${min.toString().padStart(2, 0)}:${sec
       .toString()
       .padStart(2, 0)}`;
-    time--;
 
-    if (time < 0) {
+    if (time === 0) {
       clearInterval(timeout);
       containerApp.style = 'opacity: 0;';
+      labelWelcome.textContent = 'Log in to get started';
     }
-  }, 1000);
+    time--;
+  };
+
+  tick();
+  const timeout = setInterval(tick, 1000);
+
+  return timeout;
 };
 
 const createUserName = function (accs) {
@@ -200,7 +203,10 @@ const changeWelcome = function (name) {
 const login = function (event) {
   event.preventDefault();
 
-  autoLogout();
+  if (timer) {
+    clearInterval(timer);
+  }
+  timer = autoLogout();
 
   const name = inputLoginUsername.value;
   const pin = Number(inputLoginPin.value);
@@ -354,6 +360,7 @@ const closeAcc = function (event) {
     containerApp.style = 'opacity: 0;';
     const idx = accounts.findIndex((acc) => acc.username === name);
     accounts.splice(idx, 1);
+    labelWelcome.textContent = 'Log in to get started';
   }
 
   inputCloseUsername.value = '';
