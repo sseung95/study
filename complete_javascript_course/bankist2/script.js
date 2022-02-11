@@ -7,15 +7,21 @@ const header = document.querySelector('.header');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const section1 = document.querySelector('#section--1');
-const btnCloseModal = document.querySelector('.btn--close-modal');
-const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const btnScrollTo = document.querySelector('.btn--scroll-to');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const contents = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
 const navLinks = document.querySelector('.nav__links');
 const links = document.querySelectorAll('.nav__link');
+const featuresImges = document.querySelectorAll('.features__img');
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.querySelector('.dots');
+
+const btnCloseModal = document.querySelector('.btn--close-modal');
+const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const btnSliderLeft = document.querySelector('.slider__btn--left');
+const btnSliderRight = document.querySelector('.slider__btn--right');
 
 const openModal = function (event) {
   event.preventDefault();
@@ -102,6 +108,7 @@ tabsContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active');
 });
 
+// Nav sticky event
 const navCallback = function (entries, observer) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -121,15 +128,17 @@ const navObsOptions = {
 const headerObserver = new IntersectionObserver(navCallback, navObsOptions);
 headerObserver.observe(header);
 
-/////
-const sectionCallback = function (entries) {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.remove('section--hidden');
-    }
-  });
+///// TODO: 왜 entries를 for 돌리지 않고 entry로 저장해서 사용해도 되는지 알아보기
+const sectionCallback = function (entries, observer) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target); // 액션이 끝난 section은 다시 observe하지 않도록 하기 위해
 };
 
+// Section scroll event
 const sectionObsOptions = {
   root: null,
   threshold: 0.1,
@@ -140,23 +149,99 @@ const sectionObserver = new IntersectionObserver(
   sectionObsOptions
 );
 const sections = document.querySelectorAll('.section');
-sections.forEach((section) => sectionObserver.observe(section));
+sections.forEach((section) => {
+  sectionObserver.observe(section);
+  // html에서 hidden을 직접 추가하면 js 비활성화는 사람들에게는 페이지가 보여지지 않으므로
+  section.classList.add('section--hidden');
+});
 
-// const initalCoords = section1.getBoundingClientRect();
+// Lazy loading images
+const lazyCallback = function (entries, observer) {
+  const [entry] = entries;
 
-// window.addEventListener('scroll', function () {
-//   if (
-//     this.window.scrollY >= initalCoords.top &&
-//     !nav.classList.contains('sticky')
-//   ) {
-//     nav.classList.add('sticky');
-//   } else if (
-//     this.window.scrollY < initalCoords.top &&
-//     nav.classList.contains('sticky')
-//   ) {
-//     nav.classList.remove('sticky');
-//   }
-// });
+  if (!entry.isIntersecting) return;
+
+  entry.target.setAttribute('src', entry.target.dataset.src);
+
+  // 해당 이미지가 로드된 후에 lazy-img를 제거해야 바로 선명한 이미지 볼 수 있다.
+  // (lazy-img를 빨리 제거하면 흐릿한 이미지가 먼저 보인 뒤 선명한 이미지 보임)
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+};
+
+const lazyObserver = new IntersectionObserver(lazyCallback, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+featuresImges.forEach((img) => lazyObserver.observe(img));
+
+// Slide event
+slides.forEach((slide, i) => {
+  slide.style.transform = `translateX(${i * 100}%)`;
+  const dot = document.createElement('button');
+  dot.classList.add('dots__dot');
+  dot.setAttribute('data-slide', i);
+
+  if (i === 0) {
+    dot.classList.add('dots__dot--active');
+  }
+
+  dotsContainer.append(dot);
+});
+
+const perArr = [
+  [0, 100, 200],
+  [-100, 0, 100],
+  [-200, -100, 0],
+];
+let perIdx = 0;
+
+const changeDot = function (idx) {
+  const dots = document.querySelectorAll('.dots__dot');
+
+  dots.forEach((dot, i) => {
+    if (i === idx) {
+      dot.classList.add('dots__dot--active');
+    } else {
+      dot.classList.remove('dots__dot--active');
+    }
+  });
+};
+
+btnSliderRight.addEventListener('click', function (e) {
+  perIdx = perIdx === 2 ? 0 : perIdx + 1;
+  slides.forEach((slide, i) => {
+    slide.style.transform = `translateX(${perArr[perIdx][i]}%)`;
+  });
+
+  changeDot(perIdx);
+});
+
+btnSliderLeft.addEventListener('click', function (e) {
+  perIdx = perIdx === 0 ? 2 : perIdx - 1;
+  slides.forEach((slide, i) => {
+    slide.style.transform = `translateX(${perArr[perIdx][i]}%)`;
+  });
+
+  changeDot(perIdx);
+});
+
+dotsContainer.addEventListener('click', function (e) {
+  const clicked = e.target;
+
+  if (!clicked.classList.contains('dots__dot')) return;
+
+  perIdx = +clicked.dataset.slide;
+
+  slides.forEach((slide, i) => {
+    slide.style.transform = `translateX(${perArr[perIdx][i]}%)`;
+  });
+  changeDot(perIdx);
+});
 
 /*
 ///////////////////////////////
