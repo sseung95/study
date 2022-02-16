@@ -87,6 +87,8 @@ class App {
   constructor() {
     this._getPosition();
 
+    this._getLocalStorage();
+
     // 이벤트
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
@@ -116,6 +118,11 @@ class App {
 
     // 지도 클릭 이벤트
     this.#map.on('click', this._showForm.bind(this));
+
+    // 지도가 로드되면 work 목록
+    this.#workouts.forEach((workout) => {
+      this._renderWorkoutMarker(workout);
+    });
   }
 
   _showForm(mapE) {
@@ -190,6 +197,9 @@ class App {
 
     // form 숨기기 + 입력 폼 초기화
     this._hideForm();
+
+    // 로컬스토리지에 저장
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout, type) {
@@ -271,8 +281,36 @@ class App {
       },
     });
 
-    workout.click();
+    // workout.click();
   }
+
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  _getLocalStorage() {
+    const workouts = JSON.parse(localStorage.getItem('workouts'));
+
+    if (!workouts) return;
+
+    this.#workouts = workouts;
+
+    this.#workouts.forEach((workout) => {
+      this._renderWorkout(workout);
+    });
+  }
+
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
+  }
+
+  /* 
+  TODO: 
+  1. workout 수정, 삭제
+  2. workout 정렬
+  3. 로컬스토리지에 있는 데이터 Running, Cycling 객체로 만들기
+  */
 }
 
 const app = new App();
