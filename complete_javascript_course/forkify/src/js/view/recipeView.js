@@ -28,6 +28,27 @@ class RecipeView extends View {
     });
   }
 
+  addHandlerAddBookmark(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--bookmark');
+      if (!btn) return;
+      handler();
+    });
+  }
+
+  addHandlerDeleteBookmark(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--bookmark');
+      if (!btn) return;
+
+      const { bookmarked } = btn.dataset;
+      const id = window.location.hash;
+      if (bookmarked) {
+        handler(id);
+      }
+    });
+  }
+
   _generateMarkup() {
     return `
     <figure class="recipe__fig">
@@ -76,9 +97,13 @@ class RecipeView extends View {
 
       <div class="recipe__user-generated">
       </div>
-      <button class="btn--round">
+      <button class="btn--round btn--bookmark" data-bookmarked="${
+        this._data.bookmarked
+      }">
         <svg class="">
-          <use href="${icons}#icon-bookmark-fill"></use>
+          <use href="${icons}#icon-bookmark${
+      this._data.bookmarked ? '-fill' : ''
+    }"></use>
         </svg>
       </button>
     </div>
