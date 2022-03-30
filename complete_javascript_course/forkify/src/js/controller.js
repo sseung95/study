@@ -21,6 +21,9 @@ const controlRecipes = async function () {
     if (!id) return;
     recipeView.renderSpinner();
 
+    // 0) 검색 결과에서 선택된 레시피 마크하기
+    resultsView.update(model.getSearchResultPage());
+
     // 1) 레시피 로딩
     await model.loadRecipe(id);
 
@@ -54,8 +57,14 @@ const controlPagination = function (gotoPage) {
   paginationView.render(model.state.search);
 };
 
+const controlServings = function (servings) {
+  model.updateServings(servings);
+  recipeView.update(model.state.recipe);
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
