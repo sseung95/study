@@ -1,0 +1,122 @@
+@charset 'utf-8';
+/* 웹폰트 설정 */
+
+/* reset */
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.3;
+  color: #666666;
+  margin: 0;
+  padding: 0;
+  background-color: #e5e5e5;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+form,
+fieldset,
+blockquote,
+address,
+table,
+thead,
+tbody,
+tfoot,
+tr,
+td,
+caption {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* card */
+.card {
+  background-color: #fff;
+  width: 280px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* photo */
+.photo > img {
+  vertical-align: top;
+}
+
+/* index */
+.index {
+  overflow: hidden;
+  padding: 16px;
+}
+
+/* user */
+.user {
+  float: left;
+}
+.user > img {
+  vertical-align: top;
+  width: 27px;
+  height: 27px;
+}
+.user > span {
+  font-size: 14px;
+  font-weight: 700;
+  vertical-align: -4px;
+}
+
+/* reactions */
+.reactions {
+  float: right;
+}
+.reactions > div {
+  margin-top: 4px;
+}
+.reactions > div + div {
+  margin-left: 13px;
+}
+.reactions > div > img {
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
+}
+.reactions > div > span {
+  font-size: 12px;
+  font-weight: 500;
+}
+.comment {
+  float: left;
+}
+.like {
+  float: right;
+}
