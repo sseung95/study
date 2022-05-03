@@ -16,67 +16,87 @@ const subBtn = document.querySelector('#form button');
 subBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
-  /* username 검사 */
-  if (username.value.length >= 3 && username.value.length <= 15) {
-    addSuccessClass(username);
-  } else {
-    addErrorClass(username);
+  // 필수 값 체크
+  checkRequired([username, email, password, password2]);
 
-    // 에러 메세지 추가
-    if (username.value.length < 3) {
-      changeErrorMsg(username, 'Username must be at least 3 characters');
-    } else if (username.value.length > 15) {
-      changeErrorMsg(username, 'Username must be less than 15 characters');
-    }
-  }
+  // 길이 체크
+  checkLength(username, 3, 15);
+  checkLength(password, 6, 25);
 
-  /* email 검사 */
-  const emailRegexp =
-    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  // 이메일 유효성 체크
+  checkEmail(email);
 
-  if (email.value.match(emailRegexp)) {
-    addSuccessClass(email);
-  } else {
-    addErrorClass(email);
-    changeErrorMsg(email, 'Email is not valid');
-  }
-
-  /* password 검사 */
-  if (password.value.length >= 6 && password.value.length <= 25) {
-    addSuccessClass(password);
-  } else {
-    addErrorClass(password);
-
-    if (password.value.length < 6) {
-      changeErrorMsg(password, 'Password must be at least 6 characters');
-    } else if (password.value.length > 25) {
-      changeErrorMsg(password, 'Password must be less than 25 characters');
-    }
-  }
-
-  /* password2 검사 */
-  if (password2.value.length === 0) {
-    addErrorClass(password2);
-    changeErrorMsg(password2, 'Password2 is required');
-  } else if (password2.value === password.value) {
-    addSuccessClass(password2);
-  } else {
-    addErrorClass(password2);
-    changeErrorMsg(password2, 'Passwords do not match');
-  }
+  // 패스워드 확인 일치 체크
+  checkPasswordMatch(password, password2);
 });
 
-function addSuccessClass(element) {
-  element.parentNode.classList.remove('error');
-  element.parentNode.classList.add('success');
+/* 함수 */
+function showSuccess(input) {
+  input.parentNode.classList.remove('error');
+  input.parentNode.classList.add('success');
 }
 
-function addErrorClass(element) {
-  element.parentNode.classList.remove('success');
-  element.parentNode.classList.add('error');
-}
+function showError(input, msg) {
+  input.parentNode.classList.remove('success');
+  input.parentNode.classList.add('error');
 
-function changeErrorMsg(element, msg) {
-  const errorMsg = element.parentNode.querySelector('small');
+  const errorMsg = input.parentNode.querySelector('small');
   errorMsg.textContent = msg;
+}
+
+// check required fields
+function checkRequired(inputArr) {
+  inputArr.forEach((input) => {
+    if (input.value.trim() === '') {
+      showError(input, `${getFieldName(input)} is required`);
+    } else {
+      showSuccess(input);
+    }
+  });
+}
+
+// check length
+function checkLength(input, min, max) {
+  if (input.value.length < min) {
+    showError(
+      input,
+      `${getFieldName(input)} must be at least ${min} characters`
+    );
+  } else if (input.value.length > max) {
+    showError(
+      input,
+      `${getFieldName(input)} must be less than ${max} characters`
+    );
+  } else {
+    showSuccess(input);
+  }
+}
+
+// check email
+function checkEmail(input) {
+  const emailRegexp =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (emailRegexp.test(input.value.trim())) {
+    showSuccess(input);
+  } else {
+    showError(input, 'Email is not valid');
+  }
+}
+
+function checkPasswordMatch(input1, input2) {
+  if (input2.value === '') {
+    checkRequired(input2);
+  } else if (input1.value === input2.value) {
+    showSuccess(input2);
+  } else {
+    showError(input2, 'Passwords do not match');
+  }
+}
+
+function getFieldName(input) {
+  return `${input.id.replace(
+    input.id.charAt(0),
+    input.id.charAt(0).toUpperCase()
+  )}`;
 }
