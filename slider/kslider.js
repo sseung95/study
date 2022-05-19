@@ -1,6 +1,11 @@
 function kSlider(target, option) {
   // 이미지만 로드 확인 후 innerName 실행
   const toBeLoaded = document.querySelectorAll(`${target} img`);
+
+  if (toBeLoaded.length === 0) {
+    throw new Error(`${target} 라는 노드를 찾지 못했습니다.`);
+  }
+
   let loadedImages = 0;
   toBeLoaded.forEach((item) => {
     item.onload = () => {
@@ -38,11 +43,19 @@ function kSlider(target, option) {
     const moveButton = createMoveButton();
     kindWrap.appendChild(moveButton);
 
+    /* 옵션 세팅 */
+    const OPTION = (function (opt) {
+      const OPT = { ...opt };
+      if (OPT.speed < 0) {
+        throw new Error(`0 이상 값을 넣으세요.`);
+      }
+      return Object.freeze(OPT);
+    })(option);
+
     /* 주요 변수 초기화 */
     let moveDist = 0;
     let currentNum = 1;
-    const speedTime = option.speed;
-    console.log(speedTime);
+    // const speedTime = OPTION.speed;
 
     /* CSSOM 셋업 */
     const slideCloneItems = slider.children;
@@ -67,7 +80,7 @@ function kSlider(target, option) {
             moveDist = -liWidth; // 진짜A의 값으로 만들고
             slider.style.left = `${moveDist}px`; //진짜A의 위치로 보내고
             currentNum = 1; // 현재번호 업데이트
-          }, speedTime);
+          }, OPTION.speed);
         }
       } else {
         // 이전이 눌렸을때
@@ -79,7 +92,7 @@ function kSlider(target, option) {
             moveDist = -liWidth * (slideCloneItems.length - 2);
             slider.style.left = `${moveDist}px`;
             currentNum = slideCloneItems.length - 2;
-          }, speedTime);
+          }, OPTION.speed);
         }
       }
     }
@@ -90,7 +103,7 @@ function kSlider(target, option) {
       currentNum += -1 * direction;
       moveDist += liWidth * direction;
       slider.style.left = `${moveDist}px`;
-      slider.style.transition = `all ${speedTime}ms ease`;
+      slider.style.transition = `all ${OPTION.speed}ms ease`;
     }
 
     function createMoveButton() {

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./kslider.css" />
-    <script src="./kslider.js"></script>
+    <!-- <script src="./kslider.js"></script> -->
+    <script src="./kslider_ref.js"></script>
   </head>
   <body>
     <ul class="slider-obj">
@@ -22,8 +23,6 @@
     </ul>
   </body>
   <script>
-    // window.onload = function () {
-    kSlider('.slider-obj', { speed: 800 });
-    // };
+    kSlider('.slider-obj', { speed: 100, direction: 'horizontal' });
   </script>
 </html>

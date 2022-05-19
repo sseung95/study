@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./kslider2.css" />
+  </head>
+  <body>
+    <div class="kind_wrap">
+      <div class="kind_slider">
+        <ul class="slider">
+          <li>
+            <img src="https://via.placeholder.com/800x200.png?text=1" alt="" />
+          </li>
+          <li>
+            <img src="https://via.placeholder.com/800x200.png?text=2" alt="" />
+          </li>
+          <li>
+            <img src="https://via.placeholder.com/800x200.png?text=3" alt="" />
+          </li>
+        </ul>
+      </div>
+      <div class="arrow">
+        <a href="" class="prev">이전</a>
+        <a href="" class="next">다음</a>
+      </div>
+    </div>
+  </body>
+  <script>
+    window.onload = function () {
+      // 노드 준비
+      const kindWrap = document.querySelector('.kind_wrap');
+      const slider = document.querySelector('.slider');
+      const slideItems = document.querySelectorAll('li');
+      const arrow = document.querySelector('.arrow');
+
+      // 슬라이더 너비
+      const itemWidth = slideItems[0].clientWidth;
+      const sliderWidth = itemWidth * slideItems.length;
+      slider.style.width = `${sliderWidth}px`;
+
+      // 슬라이더 아이템 클론 생성
+      const cloneFirst = slideItems[0].cloneNode(true);
+      const cloneLast = slideItems[slideItems.length - 1].cloneNode(true);
+      slider.appendChild(cloneFirst);
+      slider.insertBefore(cloneLast, slideItems[0]);
+
+      // 슬라이더 클론 너비로 다시 설정
+      const cloneSlideItems = document.querySelectorAll('li');
+      const cloneSliderWidth = itemWidth * cloneSlideItems.length;
+      slider.style.width = `${cloneSliderWidth}px`;
+
+      // 주요 변수 선언
+      let moveDist = 0;
+      let currNum = 0;
+      let speedTime = 500;
+
+      // 슬라이더 진짜 첫번째로 이동
+      move(-1);
+
+      arrow.addEventListener('click', function (e) {
+        e.preventDefault();
+        const btn = e.target;
+
+        if (btn.classList.contains('prev')) {
+          move(1);
+          if (currNum === 0) {
+            setTimeout(() => {
+              slider.style.transition = `none`;
+              moveDist = -itemWidth * (cloneSlideItems.length - 2);
+              currNum = cloneSlideItems.length - 2;
+              slider.style.left = `${moveDist}px`;
+            }, speedTime);
+          }
+        } else if (btn.classList.contains('next')) {
+          move(-1);
+          if (currNum === cloneSlideItems.length - 1) {
+            setTimeout(() => {
+              slider.style.transition = `none`;
+              moveDist = -itemWidth;
+              currNum = 1;
+              slider.style.left = `${moveDist}px`;
+            }, speedTime);
+          }
+        }
+      });
+      function move(direction) {
+        currNum += -1 * direction;
+        moveDist += itemWidth * direction;
+        slider.style.left = `${moveDist}px`;
+        slider.style.transition = `all ${speedTime}ms ease`;
+        console.log(currNum);
+        console.log(moveDist);
+      }
+    };
+  </script>
+</html>
