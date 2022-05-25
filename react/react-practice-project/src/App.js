@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import NewUser from './components/User/NewUser';
 
 function App() {
-  return (
-    <div>
+  const [users, setUsers] = useState([]);
 
-    </div>
-  );
+  const addUser = (user) => {
+    setUsers((prevUser) => {
+      return [user, ...prevUser];
+    });
+    console.log(users);
+  };
+  return <NewUser onAddUser={addUser} />;
 }
 
 export default App;
